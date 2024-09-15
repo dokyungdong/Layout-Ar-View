@@ -13,17 +13,35 @@
   <script src="main.js" defer></script>
 </head>
 <body>
-  <a-scene embedded arjs>
+  <a-scene embedded arjs="sourceType: webcam;">
     <!-- Hiro 마커 인식 시 노란색 박스 나타남, 크기 및 위치 조정 -->
     <a-marker preset="hiro">
         <a-entity
          position="0 0 0"
          scale="0.05 0.05 0.05"
-         gltf-model="your-server/https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
+         gltf-model="https://raw.githack.com/AR-js-org/AR.js/master/aframe/examples/image-tracking/nft/trex/scene.gltf"
         ></a-entity>
     </a-marker>
-    <!-- 카메라의 위치 및 시야각 조정 -->
-    <a-entity camera></a-entity>
+    <!-- 카메라의 FOV 및 줌 제어 -->
+    <a-entity camera="fov: 100"></a-entity>
   </a-scene>
+
+  <script>
+    // 해상도 및 줌 설정
+    navigator.mediaDevices.getUserMedia({
+      video: {
+        width: { ideal: 1920 },
+        height: { ideal: 1080 },
+        zoom: true
+      }
+    }).then(function(stream) {
+      const track = stream.getVideoTracks()[0];
+      const capabilities = track.getCapabilities();
+
+      if (capabilities.zoom) {
+        track.applyConstraints({ advanced: [{ zoom: capabilities.zoom.max / 2 }] });
+      }
+    });
+  </script>
 </body>
 </html>
