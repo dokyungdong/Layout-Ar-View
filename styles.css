@@ -1,0 +1,12 @@
+/* 기본적인 웹페이지 스타일 */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+}
+
+/* AR.js의 A-Frame 씬의 크기 설정 */
+a-scene {
+  width: 100vw;
+  height: 100vh;
+}
