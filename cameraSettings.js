@@ -21,7 +21,7 @@ function applyCameraSettings() {
       const cameraEntity = document.querySelector('[camera]');
       if (cameraEntity) {
         cameraEntity.setAttribute('camera', {
-          fov: 80, // 예시: 실제 값으로 조정 필요
+          fov: 120, // 예시: 실제 값으로 조정 필요
           aspectRatio: width / height
         });
       }
